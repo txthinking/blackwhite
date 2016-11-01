@@ -1,4 +1,4 @@
-## A smart PAC for kiss freedom and more.
+## A PAC for freedom and more.
 
 ### How to use
 
@@ -44,8 +44,9 @@ $ go get github.com/txthinking/pac
 ### How to update white/black list
 * **Don't edit white.list/black.list directly**
 * Use the `*.sh` to update the white.list/black.list:
-* $ addWhite.sh [First-Level Domains]. ep: $addWhite.sh gov.cn
-* $ removeWhite.sh [First-Level Domains]. ep: $ removeWhite.sh gov.cn
-* $ addBlack.sh [First-Level Domains]. ep: $ addBlack.sh google.com
-* $ removeBlack.sh [First-Level Domains]. ep: $ removeBlack.sh google.com
+* `$ addWhite.sh [domains]`. ep: `$ addWhite.sh gov.cn`
+* `$ removeWhite.sh [domains]`. ep: `$ removeWhite.sh gov.cn`
+* `$ addBlack.sh [domains]`. ep: `$ addBlack.sh google.com`
+* `$ removeBlack.sh [domains]`. ep: `$ removeBlack.sh google.com`
+* Domain: prefer first-level domain.
 
