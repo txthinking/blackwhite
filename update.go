@@ -27,8 +27,8 @@ func fetchData(where string) ([]byte, error) {
 		if err != nil {
 			return nil, err
 		}
-		res.Body.Close()
-		return data, nil
+		err = res.Body.Close()
+		return data, err
 	}
 
 	f, err := os.Open(where)
@@ -39,8 +39,8 @@ func fetchData(where string) ([]byte, error) {
 	if err != nil {
 		return nil, err
 	}
-	f.Close()
-	return data, nil
+	err = f.Close()
+	return data, err
 }
 func update() {
 	makeList := func(data []byte) []string {
@@ -59,56 +59,38 @@ func update() {
 		}
 		return cm
 	}
+	makeUpdate := func() {
+		if whiteList != "" {
+			if data, err := fetchData(whiteList); err != nil {
+				log.Println(err)
+			} else {
+				wl = makeList(data)
+			}
+		}
+		if blackList != "" {
+			if data, err := fetchData(blackList); err != nil {
+				log.Println(err)
+			} else {
+				bl = makeList(data)
+			}
+		}
+		if customizeMap != "" {
+			if data, err := fetchData(customizeMap); err != nil {
+				log.Println(err)
+			} else {
+				cm = makeMap(data)
+			}
+		}
+	}
 
-	if whiteList != "" {
-		if data, err := fetchData(whiteList); err != nil {
-			log.Println(err)
-		} else {
-			wl = makeList(data)
-		}
-	}
-	if blackList != "" {
-		if data, err := fetchData(blackList); err != nil {
-			log.Println(err)
-		} else {
-			bl = makeList(data)
-		}
-	}
-	if customizeMap != "" {
-		if data, err := fetchData(customizeMap); err != nil {
-			log.Println(err)
-		} else {
-			cm = makeMap(data)
-		}
-	}
+	makeUpdate()
 	if cycle == 0 {
 		return
 	}
 	go func() {
 		for {
 			time.Sleep(time.Duration(int64(cycle)) * time.Second)
-
-			if whiteList != "" {
-				if data, err := fetchData(whiteList); err != nil {
-					log.Println(err)
-				} else {
-					wl = makeList(data)
-				}
-			}
-			if blackList != "" {
-				if data, err := fetchData(blackList); err != nil {
-					log.Println(err)
-				} else {
-					bl = makeList(data)
-				}
-			}
-			if customizeMap != "" {
-				if data, err := fetchData(customizeMap); err != nil {
-					log.Println(err)
-				} else {
-					cm = makeMap(data)
-				}
-			}
+			makeUpdate()
 		}
 	}()
 }

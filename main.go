@@ -4,6 +4,7 @@
 package main
 
 import (
+	"log"
 	"net/http"
 	"os"
 
@@ -63,7 +64,10 @@ func main() {
 		update()
 		return run()
 	}
-	app.Run(os.Args)
+	if err := app.Run(os.Args); err != nil {
+		log.Fatal(err)
+	}
+
 }
 
 func run() error {
