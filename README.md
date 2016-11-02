@@ -1,10 +1,15 @@
-## A PAC for freedom and more.
+# A PAC for freedom and more.
 
-### How to use
+## How to use
 
 #### PAC: `https://pac.txthinking.com/:MODE/:PROXY`
 
-* `MODE` is one of `white`/`black`/`all`
+* `MODE` is one of:
+
+    * `white`: Domains in the `white.list` will be connected directly, others will be connected through the proxy.
+    * `black`: Domains in the `black.list` will be connected through the proxy, others will be connected directly.
+    * `all`: All domains will be connected through the proxy.
+    
 * `PROXY` can be this: (replace 127.0.0.1:8888 with your own proxy server address)
 
     * `DIRECT` for no proxy
