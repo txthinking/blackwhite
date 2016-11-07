@@ -54,4 +54,5 @@ $ go get github.com/txthinking/pac
 * `$ addBlack.sh [domains]`. ep: `$ addBlack.sh google.com`
 * `$ removeBlack.sh [domains]`. ep: `$ removeBlack.sh google.com`
 * Domain: prefer first-level domain.
+* PR Welcome
 
