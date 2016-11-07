@@ -16,6 +16,8 @@
     * `PROXY 127.0.0.1:8888` for http proxy
     * `SOCKS5 127.0.0.1:8888; SOCKS 127.0.0.1:8888` for socks5 proxy
 
+> This online pac will automatically update from github every 24h
+
 #### Example:
 
 * White list mode: `https://pac.txthinking.com/white/SOCKS5%20127.0.0.1:1080;%20SOCKS%20127.0.0.1:1080`
