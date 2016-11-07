@@ -58,9 +58,6 @@ func main() {
 		},
 	}
 	app.Action = func(c *cli.Context) error {
-		if c.String("listen") == "" {
-			return cli.NewExitError("Listen address is empty.", 86)
-		}
 		update()
 		return run()
 	}
