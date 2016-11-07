@@ -83,14 +83,14 @@ func update() {
 		}
 	}
 
-	makeUpdate()
 	if cycle == 0 {
+		makeUpdate()
 		return
 	}
 	go func() {
 		for {
-			time.Sleep(time.Duration(int64(cycle)) * time.Second)
 			makeUpdate()
+			time.Sleep(time.Duration(int64(cycle)) * time.Second)
 		}
 	}()
 }
