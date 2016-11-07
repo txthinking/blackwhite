@@ -1,3 +1,5 @@
-www.mydevserver.com:DIRECT
-www.mytestserver.com:PROXY 127.0.0.1:8080
-www.myproserver.com:SOCKS5 127.0.0.1:1080;SOCKS 127.0.0.1:1080
+www.your-local-dev-domain.com:DIRECT
+www.your-internal-pro-domain.com:SOCKS5 127.0.0.1:1080;SOCKS 127.0.0.1:1080
+tx.dev:SOCKS5 127.0.0.1:7070;SOCKS 127.0.0.1:7070
+httpbin.org:SOCKS5 127.0.0.1:1090;SOCKS 127.0.0.1:1090
+echo.websocket.org:SOCKS5 127.0.0.1:1090;SOCKS 127.0.0.1:1090
