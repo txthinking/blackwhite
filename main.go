@@ -70,6 +70,7 @@ func main() {
 func run() error {
 	r := mux.NewRouter()
 	r.Methods("GET").Path("/{mode}/{proxy}").HandlerFunc(pac)
+	r.Methods("GET").Path("/{mode}/{proxy}/pac.pac").HandlerFunc(pac)
 
 	n := negroni.New()
 	n.Use(negroni.NewRecovery())

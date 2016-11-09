@@ -41,6 +41,7 @@ function FindProxyForURL(url, host){
     }
 
 
+	// When the number of domains increased, then this need more work for speed.
     if(wl.length !== 0){
         var l = wl.length;
         for(var i=0;i<l;i++){
