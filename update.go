@@ -7,14 +7,15 @@ import (
 	"bytes"
 	"io/ioutil"
 	"log"
+	"net"
 	"net/http"
 	"os"
 	"strings"
 	"time"
 )
 
-var wl []string
-var bl []string
+var wl map[string]map[string][]string
+var bl map[string]map[string][]string
 var cm map[string]string
 
 func fetchData(where string) ([]byte, error) {
@@ -43,8 +44,41 @@ func fetchData(where string) ([]byte, error) {
 	return data, err
 }
 func update() {
-	makeList := func(data []byte) []string {
-		return strings.Split(strings.TrimSpace(bytes.NewBuffer(data).String()), "\n")
+	makeList := func(data []byte) map[string]map[string][]string {
+		w := make(map[string]map[string][]string)
+		w["_"] = map[string][]string{"_": []string{}}
+		bb := bytes.Split(bytes.TrimSpace(data), []byte("\n"))
+		for _, d := range bb {
+			if net.ParseIP(string(d)) != nil {
+				w["_"]["_"] = append(w["_"]["_"], string(d))
+				continue
+			}
+
+			rd := reverseAsCopy(d)
+			i := bytes.IndexByte(rd, '.')
+			if i == 0 || i == len(rd)-1 {
+				// invalid
+				continue
+			}
+			if i == -1 {
+				// cn/local/...
+				w["_"]["_"] = append(w["_"]["_"], string(d))
+				continue
+			}
+
+			suffix := string(rd[:i])
+			index := string(rd[i+1 : i+2])
+			_, ok := w[suffix]
+			if !ok {
+				w[suffix] = make(map[string][]string)
+			}
+			_, ok = w[suffix][index]
+			if !ok {
+				w[suffix][index] = make([]string, 0)
+			}
+			w[suffix][index] = append(w[suffix][index], string(d))
+		}
+		return w
 	}
 	makeMap := func(data []byte) map[string]string {
 		cm := make(map[string]string)
@@ -52,7 +86,6 @@ func update() {
 		for _, s := range ss {
 			tmp := strings.SplitN(s, ":", 2)
 			if len(tmp) < 2 {
-				log.Println("Invalid rule in customized map:", s)
 				continue
 			}
 			cm[tmp[0]] = tmp[1]
@@ -93,4 +126,19 @@ func update() {
 			time.Sleep(time.Duration(int64(cycle)) * time.Second)
 		}
 	}()
+}
+
+func reverseAsCopy(s []byte) []byte {
+	a := make([]byte, len(s))
+	copy(a, s)
+	i := 0
+	j := len(a) - 1
+	for i < j {
+		x := a[i]
+		a[i] = a[j]
+		a[j] = x
+		i++
+		j--
+	}
+	return a
 }
