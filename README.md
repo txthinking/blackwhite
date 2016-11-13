@@ -20,7 +20,7 @@
 
 #### Example:
 
-* White list mode: `https://pac.txthinking.com/white/SOCKS5%20127.0.0.1:1080;%20SOCKS%20127.0.0.1:1080`
+* White list mode: `https://pac.txthinking.com/white/SOCKS5%20127.0.0.1:1080;%20SOCKS%20127.0.0.1:1080` [Recommend]
 * Black list mode: `https://pac.txthinking.com/black/SOCKS5%20127.0.0.1:1080;%20SOCKS%20127.0.0.1:1080`
 * All mode: `https://pac.txthinking.com/all/PROXY%20127.0.0.1:8118`
 
@@ -49,12 +49,18 @@ $ go get github.com/txthinking/pac
 ```
 
 ### How to update white/black list
+
 * **Don't edit white.list/black.list directly**
 * Use the `*.sh` to update the white.list/black.list:
-* `$ addWhite.sh [domains]`. ep: `$ addWhite.sh gov.cn`
-* `$ removeWhite.sh [domains]`. ep: `$ removeWhite.sh gov.cn`
+* `$ addWhite.sh [domains]`. ep: `$ addWhite.sh china.com`
+* `$ removeWhite.sh [domains]`. ep: `$ removeWhite.sh china.com`
 * `$ addBlack.sh [domains]`. ep: `$ addBlack.sh google.com`
 * `$ removeBlack.sh [domains]`. ep: `$ removeBlack.sh google.com`
 * Domain: prefer first-level domain.
 * PR Welcome
 
+### Thanks to
+
+* https://github.com/Leask/Flora_Pac
+* https://github.com/breakwa11/gfw_whitelist
+* https://github.com/n0wa11/gfw_whitelist
