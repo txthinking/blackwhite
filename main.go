@@ -22,6 +22,7 @@ var cycle int
 func main() {
 	app := cli.NewApp()
 	app.Name = "PAC"
+	app.Version = "1.2.3"
 	app.Usage = "A smart PAC file"
 	app.Author = "Cloud"
 	app.Email = "cloud@txthinking.com"
