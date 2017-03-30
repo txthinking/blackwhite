@@ -9,7 +9,7 @@ import (
 	"time"
 )
 
-func init() {
+func InitWhiteList() {
 	client := &http.Client{
 		Timeout: 10 * time.Second,
 		Transport: &http.Transport{
