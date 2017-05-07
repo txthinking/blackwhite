@@ -1,3 +1,4 @@
+InternetRadio.all
 air.com.tencent.qqfarm
 air.tv.douyu.android
 bdmobile.android.app
@@ -14,18 +15,19 @@ cn.jingling.motu.photowonder
 cn.kuwo.tingshu
 cn.opda.a.phonoalbumshoushou
 cn.sina.music
+com.UCMobile.intl
+com.ali.money.shield
 com.alibaba.adi.collie
 com.alibaba.android.rimet
 com.alibaba.mobileim
-com.ali.money.shield
 com.alipay.android.client.pad
 com.alipay.m.portal
 com.alipay.newsletter.ui
 com.antfortune.wealth
 com.anysoft.tyyd
 com.autonavi.minimap
-com.baidu.appsearch
 com.baidu.BaiduMap
+com.baidu.appsearch
 com.baidu.baidutranslate
 com.baidu.baike
 com.baidu.browser.apps
@@ -130,10 +132,11 @@ com.letv.watchball
 com.meelive.ingkee
 com.melot.game
 com.memezhibo.android
+com.mi.vtalk
 com.minyue.shijigushi
 com.miui.backup.transfer
-com.mi.vtalk
 com.mobike.mobikeapp
+com.netease.cloudmusic
 com.netease.huatian
 com.netease.mail
 com.netease.mobimail
@@ -151,12 +154,12 @@ com.qihoo.appstore
 com.qiyi.video
 com.qiyi.video.pad
 com.qq.ac.android
-com.qqgame.hldouniu
 com.qq.qcloud
+com.qqgame.hldouniu
 com.qzone
 com.sankuai.meituan
-com.sankuai.meituanhd
 com.sankuai.meituan.merchant
+com.sankuai.meituanhd
 com.sankuai.movie
 com.sdu.didi.gsui
 com.sdu.didi.gui
@@ -203,6 +206,7 @@ com.taobao.taoban
 com.taobao.taobao
 com.taobao.trip
 com.taou.maimai
+com.tencent.PmdCampus
 com.tencent.android.qqdownloader
 com.tencent.androidqqmail
 com.tencent.huayang
@@ -221,7 +225,6 @@ com.tencent.news
 com.tencent.now
 com.tencent.oscar
 com.tencent.pb
-com.tencent.PmdCampus
 com.tencent.portfolio
 com.tencent.qlauncher
 com.tencent.qpaint
@@ -234,8 +237,8 @@ com.tencent.qqmusic
 com.tencent.qqmusiclocalplayer
 com.tencent.qqmusicpad
 com.tencent.qqpim
-com.tencent.qqpimsecureglobal
 com.tencent.qqpimsecure.google
+com.tencent.qqpimsecureglobal
 com.tencent.qqpinyin
 com.tencent.qqsports
 com.tencent.qt.qtl
@@ -268,7 +271,6 @@ com.tudou.doubao.vs_1_3_10001162
 com.tudou.videostore
 com.tudou.xoom.android
 com.ubercab
-com.UCMobile.intl
 com.vedioplayermeno.rgv
 com.verycd.base
 com.vmall.client
@@ -308,7 +310,6 @@ ctrip.android.view
 dopool.player
 fm.qingting.qtradio
 im.yixin
-InternetRadio.all
 me.ele
 org.fungo.fungolive
 org.zhiboba.sports
