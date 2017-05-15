@@ -1,17 +1,27 @@
 package blackwhite
 
-import "testing"
+import (
+	"strings"
+	"testing"
+)
 
 func TestIsWhite(t *testing.T) {
-	ok := isWhite("211.94.114.48")
+	ok := IsWhite("211.94.114.48")
 	t.Log(ok)
 
-	ok = isWhite("www.google.com")
+	ok = IsWhite("www.google.com")
 	t.Log(ok)
 
-	ok = isWhite("music.163.com")
+	ok = IsWhite("music.163.com")
 	t.Log(ok)
 
-	ok = isWhite("www.txthinking.com")
+	ok = IsWhite("www.txthinking.com")
 	t.Log(ok)
+}
+
+func TestGetWhiteListAPP(t *testing.T) {
+	s := string(strings.TrimSpace(was))
+	ss := strings.Split(s, "\n")
+	t.Log(":" + ss[0] + ":")
+	t.Log(":" + ss[len(ss)-1] + ":")
 }
