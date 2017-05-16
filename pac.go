@@ -166,6 +166,8 @@ function FindProxyForURL(url, host){
 `
 
 func getData(mode, proxy string) map[string]interface{} {
+	uplock.RLock()
+	defer uplock.RUnlock()
 	if mode == "white" {
 		return map[string]interface{}{
 			"proxy": proxy,

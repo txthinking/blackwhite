@@ -11,6 +11,7 @@ import (
 	"net/http"
 	"os"
 	"strings"
+	"sync"
 	"time"
 
 	"github.com/txthinking/ant"
@@ -20,6 +21,7 @@ var wl map[string]map[string][]string
 var bl map[string]map[string][]string
 var cm map[string]string
 var wc []map[string]int64
+var uplock *sync.RWMutex = &sync.RWMutex{}
 
 func fetchData(where string) ([]byte, error) {
 	if strings.HasPrefix(where, "http://") || strings.HasPrefix(where, "https://") {
@@ -119,6 +121,8 @@ func update() {
 		return wc
 	}
 	makeUpdate := func() {
+		uplock.Lock()
+		defer uplock.Unlock()
 		if whiteList != "" {
 			if data, err := fetchData(whiteList); err != nil {
 				log.Println(err)
