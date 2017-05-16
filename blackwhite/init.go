@@ -4,12 +4,21 @@ import (
 	"bytes"
 	"crypto/tls"
 	"io/ioutil"
+	"net"
 	"net/http"
 	"strings"
 	"time"
 )
 
 func InitWhiteList() {
+	for _, v := range china_cidr {
+		_, in, err := net.ParseCIDR(v)
+		if err != nil {
+			continue
+		}
+		chinaNet = append(chinaNet, in)
+	}
+
 	client := &http.Client{
 		Timeout: 5 * time.Second,
 		Transport: &http.Transport{

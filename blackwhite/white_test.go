@@ -6,6 +6,7 @@ import (
 )
 
 func TestIsWhite(t *testing.T) {
+	InitWhiteList()
 	ok := IsWhite("211.94.114.48")
 	t.Log(ok)
 
@@ -17,9 +18,12 @@ func TestIsWhite(t *testing.T) {
 
 	ok = IsWhite("www.txthinking.com")
 	t.Log(ok)
+
+	ok = IsWhite("121.196.205.97")
+	t.Log(ok)
 }
 
-func TestGetWhiteListAPP(t *testing.T) {
+func TestGetWhiteAPP(t *testing.T) {
 	s := string(strings.TrimSpace(was))
 	ss := strings.Split(s, "\n")
 	t.Log(":" + ss[0] + ":")

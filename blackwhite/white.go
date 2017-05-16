@@ -14,10 +14,7 @@ import (
 func IsWhite(host string) bool {
 	ip := net.ParseIP(host)
 	if ip != nil {
-		if _, ok := white_list[host]; ok {
-			return true
-		}
-		return false
+		return IsWhiteIP(ip)
 	}
 	ss := strings.Split(host, ".")
 	var s string
@@ -34,6 +31,17 @@ func IsWhite(host string) bool {
 	return false
 }
 
+var chinaNet []*net.IPNet = make([]*net.IPNet, 0)
+
+func IsWhiteIP(ip net.IP) bool {
+	for _, v := range chinaNet {
+		if v.Contains(ip) {
+			return true
+		}
+	}
+	return false
+}
+
 func GetWhiteAPP() (string, error) {
 	client := &http.Client{
 		Timeout: 5 * time.Second,
@@ -43,7 +51,7 @@ func GetWhiteAPP() (string, error) {
 	}
 	res, err := client.Get("https://brook.txthinking.com/white_apps.list")
 	if err != nil {
-		return strings.TrimSpace(was), nil
+		return strings.TrimSpace(white_app), nil
 	}
 	defer res.Body.Close()
 	data, err := ioutil.ReadAll(res.Body)

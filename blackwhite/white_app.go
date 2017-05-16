@@ -1,5 +1,6 @@
 package blackwhite
-var was string = `
+
+var white_app string = `
 InternetRadio.all
 air.com.tencent.qqfarm
 air.tv.douyu.android
