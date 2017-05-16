@@ -15,6 +15,7 @@ import (
 
 var listen string
 var whiteList string
+var whiteCIDR string
 var blackList string
 var customizeMap string
 var cycle int
@@ -22,7 +23,7 @@ var cycle int
 func main() {
 	app := cli.NewApp()
 	app.Name = "PAC"
-	app.Version = "1.2.3"
+	app.Version = "20170516"
 	app.Usage = "A smart PAC file"
 	app.Author = "Cloud"
 	app.Email = "cloud@txthinking.com"
@@ -38,6 +39,12 @@ func main() {
 			Value:       "https://raw.githubusercontent.com/txthinking/pac/master/white.list",
 			Usage:       "White list file path or http link.",
 			Destination: &whiteList,
+		},
+		cli.StringFlag{
+			Name:        "whiteCIDR",
+			Value:       "https://raw.githubusercontent.com/txthinking/pac/master/china_cidr.list",
+			Usage:       "White list file path or http link.",
+			Destination: &whiteCIDR,
 		},
 		cli.StringFlag{
 			Name:        "black",

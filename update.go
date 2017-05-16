@@ -12,11 +12,14 @@ import (
 	"os"
 	"strings"
 	"time"
+
+	"github.com/txthinking/ant"
 )
 
 var wl map[string]map[string][]string
 var bl map[string]map[string][]string
 var cm map[string]string
+var wc []map[string]int64
 
 func fetchData(where string) ([]byte, error) {
 	if strings.HasPrefix(where, "http://") || strings.HasPrefix(where, "https://") {
@@ -92,6 +95,29 @@ func update() {
 		}
 		return cm
 	}
+	makeWhiteCIDR := func(data []byte) []map[string]int64 {
+		wc := make([]map[string]int64, 0)
+		ss := strings.Split(strings.TrimSpace(bytes.NewBuffer(data).String()), "\n")
+		for _, s := range ss {
+			c, err := ant.CIDR(s)
+			if err != nil {
+				continue
+			}
+			first, err := ant.IP2Decimal(c.First)
+			if err != nil {
+				continue
+			}
+			last, err := ant.IP2Decimal(c.Last)
+			if err != nil {
+				continue
+			}
+			m := make(map[string]int64)
+			m["first"] = first
+			m["last"] = last
+			wc = append(wc, m)
+		}
+		return wc
+	}
 	makeUpdate := func() {
 		if whiteList != "" {
 			if data, err := fetchData(whiteList); err != nil {
@@ -112,6 +138,13 @@ func update() {
 				log.Println(err)
 			} else {
 				cm = makeMap(data)
+			}
+		}
+		if whiteCIDR != "" {
+			if data, err := fetchData(whiteCIDR); err != nil {
+				log.Println(err)
+			} else {
+				wc = makeWhiteCIDR(data)
 			}
 		}
 	}

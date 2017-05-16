@@ -28,6 +28,12 @@ var wl = {
 	},{{end}}
 };{{end}}
 
+{{if .wc}}
+var wc = [
+	{{range .wc}}
+	[{{.first}},{{.last}}],{{end}}
+];{{end}}
+
 {{if .bl}}
 var bl = {
 	{{range $k, $v := .bl}}
@@ -43,6 +49,11 @@ var bl = {
 var cm = { {{range $k, $v := .cm}}
 "{{$k}}":"{{$v}}",{{end}} };
 
+function ip2decimal(ip) {
+	var d = ip.split('.');
+	return ((((((+d[0])*256)+(+d[1]))*256)+(+d[2]))*256)+(+d[3]);
+}
+
 function FindProxyForURL(url, host){
 	// customized
     if(cm.hasOwnProperty(host)){
@@ -57,7 +68,26 @@ function FindProxyForURL(url, host){
                 isInNet(dnsResolve(host), "127.0.0.0", "255.255.255.0")){
             return "DIRECT";
         }
+		{{if .wc}}
+		var d = ip2decimal(host);
+		var l = wc.length;
+		var min = 0;
+		var max = l;
+		for(;;){
+			if (min+1 > max) {
+				break;
+			}
+			var mid = Math.floor(min+(max-min)/2);
+			if(d >= wc[mid][0] && d<=wc[mid][1]){
+				return "DIRECT";
+			}else if(d < wc[mid][0]){
+				max = mid;
+			}else{
+				min = mid+1;
+			}
+		}{{end}}
     }
+
 	// plain
     if (isPlainHostName(host)){
         return "DIRECT";
@@ -141,6 +171,7 @@ func getData(mode, proxy string) map[string]interface{} {
 			"proxy": proxy,
 			"wl":    wl,
 			"cm":    cm,
+			"wc":    wc,
 		}
 	}
 	if mode == "black" {
