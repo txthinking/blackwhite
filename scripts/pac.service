@@ -1,0 +1,17 @@
+[Unit]
+Description=An Online PAC https://github.com/txthinking/pac
+
+[Service]
+LimitCORE=infinity
+LimitNOFILE=65536
+LimitNPROC=65530
+LimitSTACK=25600
+EnvironmentFile=/home/tx/go/src/github.com/txthinking/pac/scripts/options
+ExecStart=/home/tx/go/bin/pac $OPTIONS
+KillMode=control-group
+Restart=always
+Type=simple
+
+[Install]
+WantedBy=multi-user.target
+
