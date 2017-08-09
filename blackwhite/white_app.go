@@ -1,5 +1,4 @@
 package blackwhite
-
 var white_app string = `
 InternetRadio.all
 air.com.tencent.qqfarm
@@ -279,6 +278,7 @@ com.verycd.base
 com.vmall.client
 com.wali.live
 com.weibo.messenger
+com.weico.international
 com.wyfc.writenovel
 com.xiaomi.channel
 com.xiaomi.channel_mface
