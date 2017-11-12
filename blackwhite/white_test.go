@@ -6,26 +6,33 @@ import (
 )
 
 func TestIsWhite(t *testing.T) {
-	ok := IsWhite("211.94.114.48")
-	t.Log(ok)
+	if !IsWhite("211.94.114.48") {
+		t.Fatal("Failed")
+	}
 
-	ok = IsWhite("www.google.com")
-	t.Log(ok)
+	if IsWhite("www.google.com") {
+		t.Fatal("Failed")
+	}
 
-	ok = IsWhite("music.163.com")
-	t.Log(ok)
+	if !IsWhite("music.163.com") {
+		t.Fatal("Failed")
+	}
 
-	ok = IsWhite("www.txthinking.com")
-	t.Log(ok)
+	if !IsWhite("www.txthinking.com") {
+		t.Fatal("Failed")
+	}
 
-	ok = IsWhite("121.196.205.97")
-	t.Log(ok)
+	if !IsWhite("121.196.205.97") {
+		t.Fatal("Failed")
+	}
 
-	ok = IsWhite("a.cn")
-	t.Log(ok)
+	if !IsWhite("a.cn") {
+		t.Fatal("Failed")
+	}
 
-	ok = IsWhite("txthinking.com")
-	t.Log(ok)
+	if !IsWhite("txthinking.com") {
+		t.Fatal("Failed")
+	}
 }
 
 func TestGetWhiteAPP(t *testing.T) {
