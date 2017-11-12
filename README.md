@@ -64,3 +64,4 @@ $ go get github.com/txthinking/pac
 * https://github.com/Leask/Flora_Pac
 * https://github.com/breakwa11/gfw_whitelist
 * https://github.com/n0wa11/gfw_whitelist
+* https://github.com/txthinking/google-hosts
