@@ -33,6 +33,10 @@ func TestIsWhite(t *testing.T) {
 	if !IsWhite("txthinking.com") {
 		t.Fatal("Failed")
 	}
+
+	if !IsWhite("192.168.1.1") {
+		t.Fatal("Failed")
+	}
 }
 
 func TestGetWhiteAPP(t *testing.T) {
