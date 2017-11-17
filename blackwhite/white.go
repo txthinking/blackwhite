@@ -5,12 +5,14 @@ import (
 	"strings"
 )
 
+var whiteNet []*net.IPNet
+
 // IsWhite determine whether host is in white list or china cidr,
 // host like www.google.com or ip.
 func IsWhite(host string) bool {
 	ip := net.ParseIP(host)
 	if ip != nil {
-		return IsChinaIP(ip)
+		return IsWhiteIP(ip)
 	}
 	ss := strings.Split(host, ".")
 	var s string
@@ -29,4 +31,13 @@ func IsWhite(host string) bool {
 
 func GetWhiteAPP() (string, error) {
 	return strings.TrimSpace(white_app), nil
+}
+
+func IsWhiteIP(ip net.IP) bool {
+	for _, v := range whiteNet {
+		if v.Contains(ip) {
+			return true
+		}
+	}
+	return false
 }

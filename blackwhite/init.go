@@ -3,12 +3,12 @@ package blackwhite
 import "net"
 
 func init() {
-	chinaNet = make([]*net.IPNet, 0)
+	whiteNet = make([]*net.IPNet, 0)
 	for _, v := range white_cidr {
 		_, in, err := net.ParseCIDR(v)
 		if err != nil {
 			continue
 		}
-		chinaNet = append(chinaNet, in)
+		whiteNet = append(whiteNet, in)
 	}
 }
