@@ -9,6 +9,7 @@ do
     then
         echo "Exists: $dm"
     else
+        echo "$dm" >> ./black.list
         sort -u ./black.list -o ./black.list
         echo "Added: $dm"
     fi
