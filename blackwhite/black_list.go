@@ -3799,6 +3799,7 @@ var black_list = map[string]byte{
 "solarsystem.nasa.gov":0,
 "solidaritetibet.org":0,
 "solidfiles.com":0,
+"soma.im":0,
 "somee.com":0,
 "songjianjun.com":0,
 "sonicbbs.cc":0,
