@@ -6,8 +6,8 @@ echo 'package blackwhite' > _
 echo 'var white_cidr []string = []string{' >> _
 echo '"10.0.0.0/8",' >> _
 echo '"100.64.0.0/10",' >> _
-echo '"169.254.1.0/16",' >> _
-echo '"172.68.0.0/12",' >> _
+echo '"169.254.0.0/16",' >> _
+echo '"172.16.0.0/12",' >> _
 echo '"192.168.0.0/16",' >> _
 awk '{print "\"" $1 "\","}' ../china_cidr.list >> _
 echo '}' >> _
