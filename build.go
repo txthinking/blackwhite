@@ -49,7 +49,7 @@ func main() {
 		},
 		cli.StringFlag{
 			Name:        "proxy",
-			Value:       "SOCKS5 127.0.0.1:1080; SOCKS 127.0.0.1:1080",
+			Value:       "SOCKS5 127.0.0.1:1080; SOCKS 127.0.0.1:1080; DIRECT",
 			Usage:       "Proxy",
 			Destination: &proxy,
 		},

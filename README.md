@@ -12,35 +12,13 @@
 * `$ addBlack.sh [domains]`. ep: `$ addBlack.sh google.com`
 * `$ removeBlack.sh [domains]`. ep: `$ removeBlack.sh google.com`
 * Don't edit white.list/black.list directly
-* Domain: prefer first-level domain
+* Prefer first-level domain
 
-### How to build pac file
+### How to build PAC file
 
 ```
-$ go run build.go --help
-
-NAME:
-   PAC - PAC file generator
-
-USAGE:
-   build [global options] command [command options] [arguments...]
-
-VERSION:
-   20180503
-
-AUTHOR:
-   Cloud <cloud@txthinking.com>
-
-COMMANDS:
-     help, h  Shows a list of commands or help for one command
-
-GLOBAL OPTIONS:
-   --whitelist value  White list file. (default: "./white.list")
-   --whitecidr value  White CIDR file (default: "./china_cidr.list")
-   --blacklist value  Black list file (default: "./black.list")
-   --proxy value      Proxy (default: "SOCKS5 127.0.0.1:1080; SOCKS 127.0.0.1:1080")
-   --help, -h         show help
-   --version, -v      print the version
+$ go run build.go --proxy "SOCKS5 127.0.0.1:1080; SOCKS 127.0.0.1:1080; DIRECT"
+$ go run build.go --proxy "PROXY 127.0.0.1:8080; DIRECT"
 ```
 
 ### Thanks to
