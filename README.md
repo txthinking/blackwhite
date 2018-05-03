@@ -2,26 +2,25 @@
 
 ### The Online PAC
 
-* White List Mode with socks5://127.0.0.1:1080
-    `https://www.txthinking.com/pac/white.pac`
-* Black List Mode with socks5://127.0.0.1:1080
-    `https://www.txthinking.com/pac/black.pac`
+* White List Mode with socks5://127.0.0.1:1080 `https://www.txthinking.com/pac/white.pac`
+* Black List Mode with socks5://127.0.0.1:1080 `https://www.txthinking.com/pac/black.pac`
 
 ### How to update white/black list
 
-* **Don't edit white.list/black.list directly**
-* Use the `*.sh` to update the white.list/black.list:
 * `$ addWhite.sh [domains]`. ep: `$ addWhite.sh china.com`
 * `$ removeWhite.sh [domains]`. ep: `$ removeWhite.sh china.com`
 * `$ addBlack.sh [domains]`. ep: `$ addBlack.sh google.com`
 * `$ removeBlack.sh [domains]`. ep: `$ removeBlack.sh google.com`
-* Domain: prefer first-level domain.
+* Don't edit white.list/black.list directly
+* Domain: prefer first-level domain
 
 ### How to build pac file
 
 ```
+$ go run build.go --help
+
 NAME:
-   PAC - A smart PAC file
+   PAC - PAC file generator
 
 USAGE:
    build [global options] command [command options] [arguments...]

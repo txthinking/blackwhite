@@ -25,7 +25,7 @@ func main() {
 	app := cli.NewApp()
 	app.Name = "PAC"
 	app.Version = "20180503"
-	app.Usage = "A smart PAC file"
+	app.Usage = "PAC file generator"
 	app.Author = "Cloud"
 	app.Email = "cloud@txthinking.com"
 	app.Flags = []cli.Flag{
