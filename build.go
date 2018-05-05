@@ -7,7 +7,6 @@ import (
 	"bytes"
 	"io/ioutil"
 	"log"
-	"net"
 	"os"
 	"strings"
 	"text/template"
@@ -73,7 +72,7 @@ func build() error {
 	if err != nil {
 		return err
 	}
-	wl := makeList(data)
+	wl := strings.Split(strings.TrimSpace(bytes.NewBuffer(data).String()), "\n")
 	data, err = ioutil.ReadFile(whiteCIDR)
 	if err != nil {
 		return err
@@ -98,7 +97,7 @@ func build() error {
 	if err != nil {
 		return err
 	}
-	bl := makeList(data)
+	bl := strings.Split(strings.TrimSpace(bytes.NewBuffer(data).String()), "\n")
 	f, err = os.OpenFile("./black.pac", os.O_WRONLY|os.O_TRUNC|os.O_CREATE, 0644)
 	if err != nil {
 		return err
@@ -113,57 +112,7 @@ func build() error {
 		return err
 	}
 
-	f, err = os.OpenFile("./all.pac", os.O_WRONLY|os.O_TRUNC|os.O_CREATE, 0644)
-	if err != nil {
-		return err
-	}
-	if err := t.Execute(f, map[string]interface{}{
-		"proxy": proxy,
-	}); err != nil {
-		return err
-	}
-	if err := f.Close(); err != nil {
-		return err
-	}
-
 	return nil
-}
-
-func makeList(data []byte) map[string]map[string][]string {
-	w := make(map[string]map[string][]string)
-	w["_"] = map[string][]string{"_": []string{}}
-	bb := bytes.Split(bytes.TrimSpace(data), []byte("\n"))
-	for _, d := range bb {
-		if net.ParseIP(string(d)) != nil {
-			w["_"]["_"] = append(w["_"]["_"], string(d))
-			continue
-		}
-
-		rd := reverseAsCopy(d)
-		i := bytes.IndexByte(rd, '.')
-		if i == 0 || i == len(rd)-1 {
-			// invalid
-			continue
-		}
-		if i == -1 {
-			// cn/local/...
-			w["_"]["_"] = append(w["_"]["_"], string(d))
-			continue
-		}
-
-		suffix := string(rd[:i])
-		index := string(rd[i+1 : i+2])
-		_, ok := w[suffix]
-		if !ok {
-			w[suffix] = make(map[string][]string)
-		}
-		_, ok = w[suffix][index]
-		if !ok {
-			w[suffix][index] = make([]string, 0)
-		}
-		w[suffix][index] = append(w[suffix][index], string(d))
-	}
-	return w
 }
 
 func makeWhiteCIDR(data []byte) []map[string]int64 {
@@ -190,56 +139,36 @@ func makeWhiteCIDR(data []byte) []map[string]int64 {
 	return wc
 }
 
-func reverseAsCopy(s []byte) []byte {
-	a := make([]byte, len(s))
-	copy(a, s)
-	i := 0
-	j := len(a) - 1
-	for i < j {
-		x := a[i]
-		a[i] = a[j]
-		a[j] = x
-		i++
-		j--
-	}
-	return a
-}
-
 const js = `
 //
 // https://github.com/txthinking/pac
 //
+
 var proxy="{{.proxy}}";
 
 {{if .wl}}
 var wl = {
-    {{range $k, $v := .wl}}
-    "{{$k}}" : {
-        {{range $kk, $vv := $v}}
-        "{{$kk}}": [
-            {{range $vv}}
-            "{{.}}",{{end}}
-        ],{{end}}
-    },{{end}}
-};{{end}}
+	{{range .wl}}
+	"{{.}}": 1,
+	{{end}}
+};
+{{end}}
 
 {{if .wc}}
 var wc = [
     {{range .wc}}
-    [{{.first}},{{.last}}],{{end}}
-];{{end}}
+    [{{.first}},{{.last}}],
+	{{end}}
+];
+{{end}}
 
 {{if .bl}}
 var bl = {
-    {{range $k, $v := .bl}}
-    "{{$k}}" : {
-        {{range $kk, $vv := $v}}
-        "{{$kk}}": [
-            {{range $vv}}
-            "{{.}}",{{end}}
-        ],{{end}}
-    },{{end}}
-};{{end}}
+	{{range .bl}}
+	"{{.}}": 1,
+	{{end}}
+};
+{{end}}
 
 function ip2decimal(ip) {
     var d = ip.split('.');
@@ -247,7 +176,6 @@ function ip2decimal(ip) {
 }
 
 function FindProxyForURL(url, host){
-    // internal
     if(/\d+\.\d+\.\d+\.\d+/.test(host)){
         if (isInNet(dnsResolve(host), "10.0.0.0", "255.0.0.0") ||
                 isInNet(dnsResolve(host), "172.16.0.0",  "255.240.0.0") ||
@@ -272,82 +200,32 @@ function FindProxyForURL(url, host){
             }else{
                 min = mid+1;
             }
-        }{{end}}
+        }
+		{{end}}
     }
 
-    // plain
     if (isPlainHostName(host)){
         return "DIRECT";
     }
 
     {{if .wl}}
-
-    var l = wl["_"]["_"].length;
-    for(var i=0;i<l;i++){
-        if(dnsDomainIs(host, wl["_"]["_"][i])){
-            return "DIRECT";
-        }
-    }
-
-    var rd = host.split("").reverse().join("")
-    var i = rd.indexOf(".")
-    if (i == 0 || i == rd.length-1){
-        return "DIRECT";
-    }
-    if (i == -1){
-        return "DIRECT";
-    }
-    var suffix = rd.substring(0, i)
-    var index = rd.substring(i+1, i+2)
-    if (!wl.hasOwnProperty(suffix)){
-        return proxy;
-    }
-    if (!wl[suffix].hasOwnProperty(index)){
-        return proxy;
-    }
-    var l = wl[suffix][index].length;
-    for(var i=0;i<l;i++){
-        if(dnsDomainIs(host, wl[suffix][index][i])){
+    var a = host.split(".");
+    for(var i=a.length-1; i>=0; i--){
+        if (wl.hasOwnProperty(a.slice(i).join("."))){
             return "DIRECT";
         }
     }
     return proxy;
+	{{end}}
 
-    {{else if .bl}}
-
-    var l = bl["_"]["_"].length;
-    for(var i=0;i<l;i++){
-        if(dnsDomainIs(host, bl["_"]["_"][i])){
-            return proxy;
+    {{if .bl}}
+    var a = host.split(".");
+    for(var i=a.length-1; i>=0; i--){
+        if (bl.hasOwnProperty(a.slice(i).join("."))){
+			return proxy;
         }
     }
-
-    var rd = host.split("").reverse().join("")
-    var i = rd.indexOf(".")
-    if (i == 0 || i == rd.length-1){
-        return "DIRECT";
-    }
-    if (i == -1){
-        return "DIRECT";
-    }
-    var suffix = rd.substring(0, i)
-    var index = rd.substring(i+1, i+2)
-    if (!bl.hasOwnProperty(suffix)){
-        return "DIRECT";
-    }
-    if (!bl[suffix].hasOwnProperty(index)){
-        return "DIRECT";
-    }
-    var l = bl[suffix][index].length;
-    for(var i=0;i<l;i++){
-        if(dnsDomainIs(host, bl[suffix][index][i])){
-            return proxy;
-        }
-    }
-    return "DIRECT";
-
-    {{else}}
-    return proxy;
+	return "DIRECT";
     {{end}}
 }
 `
