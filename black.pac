@@ -1323,6 +1323,7 @@ var bl = {
             "rferl.org",
             "rtalabel.org",
             "sharecool.org",
+            "signal.org",
             "tweepml.org",
             "upwill.org",
             "waveprotocol.org",
@@ -1615,6 +1616,7 @@ var bl = {
             "video.pbs.org",
             "vllcs.org",
             "wheatseeds.org",
+            "whispersystems.org",
             "wikileaks.org",
             "wisdompubs.org",
             "www.wan-press.org",
@@ -2446,6 +2448,7 @@ var bl = {
         
         "a": [
             
+            "isoma.im",
             "soma.im",
         ],
         "f": [
