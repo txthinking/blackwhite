@@ -15,8 +15,8 @@ go run pac.go \
     > black.pac
 
 go run pac.go \
-    -m all \
+    -m global \
     -d "" \
     -c "" \
     -p 'SOCKS5 127.0.0.1:1080; SOCKS 127.0.0.1:1080; DIRECT' \
-    > all.pac
+    > global.pac

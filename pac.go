@@ -28,7 +28,7 @@ func main() {
 		cli.StringFlag{
 			Name:        "mode, m",
 			Value:       "white",
-			Usage:       "white/black/all",
+			Usage:       "white/black/global",
 			Destination: &mode,
 		},
 		cli.StringFlag{

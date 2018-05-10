@@ -6,5 +6,5 @@ mv _ white.pac
 ./node_modules/.bin/uglifyjs --compress --mangle -- black.pac > _
 mv _ black.pac
 
-./node_modules/.bin/uglifyjs --compress --mangle -- all.pac > _
-mv _ all.pac
+./node_modules/.bin/uglifyjs --compress --mangle -- global.pac > _
+mv _ global.pac

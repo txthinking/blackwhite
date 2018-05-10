@@ -21,9 +21,9 @@ func PAC(proxy, mode, domainURL, cidrURL string) (io.Reader, error) {
 	}
 	b := &bytes.Buffer{}
 
-	if mode == "all" {
+	if mode == "global" {
 		if err := t.Execute(b, map[string]interface{}{
-			"mode":  "all",
+			"mode":  "global",
 			"proxy": proxy,
 		}); err != nil {
 			return nil, err
@@ -202,7 +202,7 @@ function FindProxyForURL(url, host){
 	}
 	{{end}}
 
-	if(mode == "all"){
+	if(mode == "global"){
 		return proxy;
 	}
 }
