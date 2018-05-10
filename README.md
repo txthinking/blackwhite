@@ -2,8 +2,8 @@
 
 ### The Online PAC
 
-* White List Mode with socks5://127.0.0.1:1080 `https://www.txthinking.com/pac/white.pac`
-* Black List Mode with socks5://127.0.0.1:1080 `https://www.txthinking.com/pac/black.pac`
+* White List Mode with `socks5://127.0.0.1:1080` `https://www.txthinking.com/pac/white.pac`
+* Black List Mode with `socks5://127.0.0.1:1080` `https://www.txthinking.com/pac/black.pac`
 
 ### How to update white/black list
 
@@ -17,8 +17,7 @@
 ### How to build PAC file
 
 ```
-$ go run build.go --proxy "SOCKS5 127.0.0.1:1080; SOCKS 127.0.0.1:1080; DIRECT"
-$ go run build.go --proxy "PROXY 127.0.0.1:8080; DIRECT"
+$ ./build.sh
 $ ./compress.sh
 ```
 
