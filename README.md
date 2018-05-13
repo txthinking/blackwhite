@@ -21,6 +21,17 @@ $ ./build.sh
 $ ./compress.sh
 ```
 
+### How to run PAC server
+
+```
+$ go run pac.go \
+    -m white \
+    -d https://www.txthinking.com/pac/white.list \
+    -c https://www.txthinking.com/pac/white_cidr.list \
+    -p 'SOCKS5 127.0.0.1:1080; SOCKS 127.0.0.1:1080; DIRECT' \
+    -s ':1980'
+```
+
 ### Thanks to
 
 * https://github.com/Leask/Flora_Pac
