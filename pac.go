@@ -5,7 +5,9 @@ package main
 
 import (
 	"io"
+	"io/ioutil"
 	"log"
+	"net/http"
 	"os"
 
 	"github.com/codegangsta/cli"
@@ -16,6 +18,7 @@ var mode string
 var domainURL string
 var cidrURL string
 var proxy string
+var server string
 
 func main() {
 	app := cli.NewApp()
@@ -49,6 +52,11 @@ func main() {
 			Usage:       "Proxy",
 			Destination: &proxy,
 		},
+		cli.StringFlag{
+			Name:        "server, s",
+			Usage:       "HTTP server address, like: 127.0.0.1:1980",
+			Destination: &server,
+		},
 	}
 	app.Action = func(c *cli.Context) error {
 		return run()
@@ -63,8 +71,20 @@ func run() error {
 	if err != nil {
 		return err
 	}
-	if _, err := io.Copy(os.Stdout, r); err != nil {
+	if server == "" {
+		if _, err := io.Copy(os.Stdout, r); err != nil {
+			return err
+		}
+		return nil
+	}
+
+	b, err := ioutil.ReadAll(r)
+	if err != nil {
 		return err
 	}
-	return nil
+	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
+		w.Header().Set("Content-Type", "application/x-ns-proxy-autoconfig")
+		w.Write(b)
+	})
+	return http.ListenAndServe(server, nil)
 }
