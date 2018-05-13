@@ -86,13 +86,19 @@ func readData(url string) ([]byte, error) {
 }
 
 func makeDomains(data []byte) []string {
-	ds := strings.Split(strings.TrimSpace(bytes.NewBuffer(data).String()), "\n")
+	data = bytes.TrimSpace(data)
+	data = bytes.Replace(data, []byte{0x20}, []byte{}, -1)
+	data = bytes.Replace(data, []byte{0x0d, 0x0a}, []byte{0x0a}, -1)
+	ds := strings.Split(string(data), "\n")
 	return ds
 }
 
 func makeCIDRs(data []byte) []map[string]int64 {
 	cs := make([]map[string]int64, 0)
-	ss := strings.Split(strings.TrimSpace(bytes.NewBuffer(data).String()), "\n")
+	data = bytes.TrimSpace(data)
+	data = bytes.Replace(data, []byte{0x20}, []byte{}, -1)
+	data = bytes.Replace(data, []byte{0x0d, 0x0a}, []byte{0x0a}, -1)
+	ss := strings.Split(string(data), "\n")
 	for _, s := range ss {
 		c, err := ant.CIDR(s)
 		if err != nil {
