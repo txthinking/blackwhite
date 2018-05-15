@@ -1,6 +1,6 @@
 # A PAC Generator
 
-### The Online
+### Online
 
 #### PAC
 
@@ -51,7 +51,7 @@ $ go run pac.go \
     -p 'SOCKS5 127.0.0.1:1080; SOCKS 127.0.0.1:1080; DIRECT' \
     -s ':1980'
 
-$ curl http://127.0.0.1:1098/proxy.pac
+$ curl http://127.0.0.1:1980/proxy.pac
 ```
 
 ### Thanks to
