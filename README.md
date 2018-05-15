@@ -49,7 +49,7 @@ $ go run pac.go \
     -d https://www.txthinking.com/pac/white.list \
     -c https://www.txthinking.com/pac/white_cidr.list \
     -p 'SOCKS5 127.0.0.1:1080; SOCKS 127.0.0.1:1080; DIRECT' \
-    -s ':1980'
+    -l ':1980'
 
 $ curl http://127.0.0.1:1980/proxy.pac
 ```

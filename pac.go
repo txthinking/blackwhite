@@ -18,7 +18,7 @@ var mode string
 var domainURL string
 var cidrURL string
 var proxy string
-var server string
+var listen string
 
 func main() {
 	app := cli.NewApp()
@@ -53,9 +53,9 @@ func main() {
 			Destination: &proxy,
 		},
 		cli.StringFlag{
-			Name:        "server, s",
+			Name:        "listen, l",
 			Usage:       "HTTP server address, like: 127.0.0.1:1980",
-			Destination: &server,
+			Destination: &listen,
 		},
 	}
 	app.Action = func(c *cli.Context) error {
@@ -71,7 +71,7 @@ func run() error {
 	if err != nil {
 		return err
 	}
-	if server == "" {
+	if listen == "" {
 		if _, err := io.Copy(os.Stdout, r); err != nil {
 			return err
 		}
@@ -86,5 +86,5 @@ func run() error {
 		w.Header().Set("Content-Type", "application/x-ns-proxy-autoconfig")
 		w.Write(b)
 	})
-	return http.ListenAndServe(server, nil)
+	return http.ListenAndServe(listen, nil)
 }

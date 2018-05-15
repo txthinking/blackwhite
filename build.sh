@@ -10,7 +10,7 @@ go run pac.go \
 go run pac.go \
     -m black \
     -d https://www.txthinking.com/pac/black.list \
-    -c "" \
+    -c https://www.txthinking.com/pac/black_cidr.list \
     -p 'SOCKS5 127.0.0.1:1080; SOCKS 127.0.0.1:1080; DIRECT' \
     > black.pac
 
