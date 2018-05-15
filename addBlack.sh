@@ -3,15 +3,15 @@
 # https://github.com/txthinking/pac
 #
 
-for dm
+for s
 do
-    if [ $(grep -P "^$dm$" ./black.list | wc -l) -gt 0 ]
+    if [ $(grep -P "^$s$" ./black.list | wc -l) -gt 0 ]
     then
-        echo "Exists: $dm"
+        echo "Exists: $s"
     else
-        echo "$dm" >> ./black.list
+        echo "$s" >> ./black.list
         sort -u ./black.list -o ./black.list
-        echo "Added: $dm"
+        echo "Added: $s"
     fi
 done
 

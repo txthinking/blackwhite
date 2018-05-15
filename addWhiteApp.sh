@@ -1,14 +1,14 @@
 #!/bin/bash
 
-for pkg
+for s
 do
-    if [ $(grep -P "^$pkg$" ./white_app.list | wc -l) -gt 0 ]
+    if [ $(grep -P "^$s$" ./white_app.list | wc -l) -gt 0 ]
     then
-        echo "Exists: $pkg"
+        echo "Exists: $s"
     else
-        echo "$pkg" >> ./white_app.list
+        echo "$s" >> ./white_app.list
         sort -u ./white_app.list -o ./white_app.list
-        echo "Added: $pkg"
+        echo "Added: $s"
     fi
 done
 

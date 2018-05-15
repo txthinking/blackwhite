@@ -3,14 +3,14 @@
 # https://github.com/txthinking/pac
 #
 
-for dm
+for s
 do
-    if [ $(grep -P "^$dm$" ./black.list | wc -l) -gt 0 ]
+    if [ $(grep -P "^$s$" ./black.list | wc -l) -gt 0 ]
     then
-        sed -r -i "/^$dm$/d" ./black.list
-        echo "Removed: $dm"
+        sed -r -i "/^$s$/d" ./black.list
+        echo "Removed: $s"
     else
-        echo "No: $dm"
+        echo "No: $s"
     fi
 done
 

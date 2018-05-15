@@ -3,15 +3,15 @@
 # https://github.com/txthinking/pac
 #
 
-for dm
+for s
 do
-    if [ $(grep -P "^$dm$" ./white.list | wc -l) -gt 0 ]
+    if [ $(grep -P "^$s$" ./white.list | wc -l) -gt 0 ]
     then
-        echo "Exists: $dm"
+        echo "Exists: $s"
     else
-        echo "$dm" >> ./white.list
+        echo "$s" >> ./white.list
         sort -u ./white.list -o ./white.list
-        echo "Added: $dm"
+        echo "Added: $s"
     fi
 done
 

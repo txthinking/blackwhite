@@ -1,18 +1,38 @@
 # A PAC Generator
 
-### The Online PAC
+### The Online
+
+#### PAC
 
 * White List Mode with `socks5://127.0.0.1:1080` `https://www.txthinking.com/pac/white.pac`
 * Black List Mode with `socks5://127.0.0.1:1080` `https://www.txthinking.com/pac/black.pac`
 
-### How to update white/black list
+#### List
 
-* `$ addWhite.sh [domains]`. ep: `$ addWhite.sh china.com`
-* `$ removeWhite.sh [domains]`. ep: `$ removeWhite.sh china.com`
-* `$ addBlack.sh [domains]`. ep: `$ addBlack.sh google.com`
-* `$ removeBlack.sh [domains]`. ep: `$ removeBlack.sh google.com`
-* Don't edit white.list/black.list directly
-* Prefer first-level domain
+* `https://www.txthinking.com/pac/white.list`
+* `https://www.txthinking.com/pac/white_cidr.list`
+* `https://www.txthinking.com/pac/white_app.list`
+* `https://www.txthinking.com/pac/black.list`
+* `https://www.txthinking.com/pac/black_cidr.list`
+* `https://www.txthinking.com/pac/black_app.list`
+
+### How to update list
+
+* `$ addWhite.sh          china.com`
+* `$ addWhiteCIDR.sh      1.0.1.0/24`
+* `$ addWhiteApp.sh       com.tencent.mm`
+* `$ addBlack.sh          google.com`
+* `$ addBlackCIDR.sh      74.125.0.0/16`
+* `$ addBlackApp.sh       com.android.chrome`
+* `$ removeWhite.sh       china.com`
+* `$ removeWhiteCIDR.sh   1.0.1.0/24`
+* `$ removeWhiteApp.sh    com.tencent.mm`
+* `$ removeBlack.sh       google.com`
+* `$ removeBlackCIDR.sh   74.125.0.0/16`
+* `$ removeBlackApp.sh    com.android.chrome`
+
+> Don't edit white.list/black.list directly<br/>
+> Prefer first-level domain
 
 ### How to build PAC file
 
@@ -30,6 +50,8 @@ $ go run pac.go \
     -c https://www.txthinking.com/pac/white_cidr.list \
     -p 'SOCKS5 127.0.0.1:1080; SOCKS 127.0.0.1:1080; DIRECT' \
     -s ':1980'
+
+$ curl http://127.0.0.1:1098/proxy.pac
 ```
 
 ### Thanks to
