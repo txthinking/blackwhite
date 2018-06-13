@@ -16,7 +16,5 @@ go run pac.go \
 
 go run pac.go \
     -m global \
-    -d "" \
-    -c "" \
     -p 'SOCKS5 127.0.0.1:1080; SOCKS 127.0.0.1:1080; DIRECT' \
     > global.pac

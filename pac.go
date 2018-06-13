@@ -4,6 +4,7 @@
 package main
 
 import (
+	"errors"
 	"io"
 	"io/ioutil"
 	"log"
@@ -23,42 +24,47 @@ var listen string
 func main() {
 	app := cli.NewApp()
 	app.Name = "PAC"
-	app.Version = "20180510"
+	app.Version = "20180613"
 	app.Usage = "PAC file generator"
 	app.Author = "Cloud"
 	app.Email = "cloud@txthinking.com"
 	app.Flags = []cli.Flag{
 		cli.StringFlag{
 			Name:        "mode, m",
-			Value:       "white",
-			Usage:       "white/black/global",
+			Usage:       "white/black/global [required]",
 			Destination: &mode,
 		},
 		cli.StringFlag{
 			Name:        "domainURL, d",
-			Value:       "https://www.txthinking.com/pac/white.list",
-			Usage:       "domains url, http(s):// or file://",
+			Usage:       "domains url, http(s):// or file:// [required when mode is not global]",
 			Destination: &domainURL,
 		},
 		cli.StringFlag{
 			Name:        "cidrURL, c",
-			Value:       "https://www.txthinking.com/pac/white_cidr.list",
-			Usage:       "CIDR url, http(s):// or file://",
+			Usage:       "CIDR url, http(s):// or file:// [optional]",
 			Destination: &cidrURL,
 		},
 		cli.StringFlag{
 			Name:        "proxy, p",
-			Value:       "SOCKS5 127.0.0.1:1080; SOCKS 127.0.0.1:1080; DIRECT",
-			Usage:       "Proxy",
+			Usage:       "Proxy, like: SOCKS5 127.0.0.1:1080; SOCKS 127.0.0.1:1080; DIRECT [required]",
 			Destination: &proxy,
 		},
 		cli.StringFlag{
 			Name:        "listen, l",
-			Usage:       "HTTP server address, like: 127.0.0.1:1980",
+			Usage:       "HTTP server address, like: 127.0.0.1:1980 [optional]",
 			Destination: &listen,
 		},
 	}
 	app.Action = func(c *cli.Context) error {
+		if mode != "global" && mode != "white" && mode != "black" {
+			return errors.New("Invalid mode")
+		}
+		if mode != "global" && domainURL == "" {
+			return errors.New("domainURL required")
+		}
+		if proxy == "" {
+			return errors.New("proxy required")
+		}
 		return run()
 	}
 	if err := app.Run(os.Args); err != nil {
