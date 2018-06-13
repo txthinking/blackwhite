@@ -36,6 +36,8 @@
 
 ### How to build PAC file
 
+Require `go`, `nodejs` installed, and `npm install`
+
 ```
 $ ./build.sh
 $ ./compress.sh
