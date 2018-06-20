@@ -4,17 +4,17 @@
 
 #### PAC
 
-* White List Mode with `socks5://127.0.0.1:1080` `https://www.txthinking.com/pac/white.pac`
-* Black List Mode with `socks5://127.0.0.1:1080` `https://www.txthinking.com/pac/black.pac`
+* White List Mode with `socks5://127.0.0.1:1080` `https://blackwhite.txthinking.com/white.pac`
+* Black List Mode with `socks5://127.0.0.1:1080` `https://blackwhite.txthinking.com/black.pac`
 
 #### List
 
-* `https://www.txthinking.com/pac/white.list`
-* `https://www.txthinking.com/pac/white_cidr.list`
-* `https://www.txthinking.com/pac/white_app.list`
-* `https://www.txthinking.com/pac/black.list`
-* `https://www.txthinking.com/pac/black_cidr.list`
-* `https://www.txthinking.com/pac/black_app.list`
+* `https://blackwhite.txthinking.com/white.list`
+* `https://blackwhite.txthinking.com/white_cidr.list`
+* `https://blackwhite.txthinking.com/white_app.list`
+* `https://blackwhite.txthinking.com/black.list`
+* `https://blackwhite.txthinking.com/black_cidr.list`
+* `https://blackwhite.txthinking.com/black_app.list`
 
 ### How to update list
 
@@ -48,8 +48,8 @@ $ ./compress.sh
 ```
 $ go run pac.go \
     -m white \
-    -d https://www.txthinking.com/pac/white.list \
-    -c https://www.txthinking.com/pac/white_cidr.list \
+    -d https://blackwhite.txthinking.com/white.list \
+    -c https://blackwhite.txthinking.com/white_cidr.list \
     -p 'SOCKS5 127.0.0.1:1080; SOCKS 127.0.0.1:1080; DIRECT' \
     -l ':1980'
 
