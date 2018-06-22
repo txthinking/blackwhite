@@ -5,7 +5,7 @@
 
 for s
 do
-    if [ $(grep -P "^$s$" ./white.list | wc -l) -gt 0 ]
+    if [ $(grep -e "^$s$" ./white.list | wc -l) -gt 0 ]
     then
         echo "Exists: $s"
     else

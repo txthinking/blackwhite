@@ -2,7 +2,7 @@
 
 for s
 do
-    if [ $(grep -P "^$s$" ./black_app.list | wc -l) -gt 0 ]
+    if [ $(grep -e "^$s$" ./black_app.list | wc -l) -gt 0 ]
     then
         echo "Exists: $s"
     else

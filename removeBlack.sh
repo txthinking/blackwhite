@@ -5,7 +5,7 @@
 
 for s
 do
-    if [ $(grep -P "^$s$" ./black.list | wc -l) -gt 0 ]
+    if [ $(grep -e "^$s$" ./black.list | wc -l) -gt 0 ]
     then
         sed -r -i "/^$s$/d" ./black.list
         echo "Removed: $s"
