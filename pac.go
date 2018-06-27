@@ -6,13 +6,13 @@ package main
 import (
 	"bytes"
 	"errors"
-	"html/template"
 	"io"
 	"io/ioutil"
 	"log"
 	"net/http"
 	"os"
 	"strings"
+	"text/template"
 	"time"
 
 	"github.com/codegangsta/cli"

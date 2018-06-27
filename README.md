@@ -6,6 +6,8 @@
 
 * White List Mode with `socks5://127.0.0.1:1080` `https://blackwhite.txthinking.com/white.pac`
 * Black List Mode with `socks5://127.0.0.1:1080` `https://blackwhite.txthinking.com/black.pac`
+* White List Mode with `http://127.0.0.1:8080` `https://blackwhite.txthinking.com/http_white.pac`
+* Black List Mode with `http://127.0.0.1:8080` `https://blackwhite.txthinking.com/http_black.pac`
 
 #### List
 
@@ -31,7 +33,7 @@
 * `$ removeBlackCIDR.sh   74.125.0.0/16`
 * `$ removeBlackApp.sh    com.android.chrome`
 
-> Don't edit white.list/black.list directly<br/>
+> Don't edit list directly<br/>
 > Prefer first-level domain
 
 ### How to build PAC file
@@ -47,15 +49,7 @@ $ go run pac.go \
     -p 'SOCKS5 127.0.0.1:1080; SOCKS 127.0.0.1:1080; DIRECT' \
     > white.pac
 
-# build black.pac
-$ go run pac.go \
-    -m black \
-    -d https://blackwhite.txthinking.com/black.list \
-    -c https://blackwhite.txthinking.com/black_cidr.list \
-    -p 'SOCKS5 127.0.0.1:1080; SOCKS 127.0.0.1:1080; DIRECT' \
-    > black.pac
-
-# build and compress
+# build more and compress
 $ ./build.sh
 ```
 
