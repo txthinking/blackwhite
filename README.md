@@ -36,11 +36,27 @@
 
 ### How to build PAC file
 
-Require `go`, `nodejs` installed, and `npm install`
+Require `go`, `nodejs` installed, and run `$ go get`, `$ npm install`
 
 ```
+# build white.pac
+$ go run pac.go \
+    -m white \
+    -d https://blackwhite.txthinking.com/white.list \
+    -c https://blackwhite.txthinking.com/white_cidr.list \
+    -p 'SOCKS5 127.0.0.1:1080; SOCKS 127.0.0.1:1080; DIRECT' \
+    > white.pac
+
+# build black.pac
+$ go run pac.go \
+    -m black \
+    -d https://blackwhite.txthinking.com/black.list \
+    -c https://blackwhite.txthinking.com/black_cidr.list \
+    -p 'SOCKS5 127.0.0.1:1080; SOCKS 127.0.0.1:1080; DIRECT' \
+    > black.pac
+
+# build and compress
 $ ./build.sh
-$ ./compress.sh
 ```
 
 ### How to run PAC server
