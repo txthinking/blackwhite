@@ -1,5 +1,6 @@
 #!/bin/bash
 
+export LC_COLLATE=C
 for s
 do
     if [ $(grep -e "^$s$" ./white_app.list | wc -l) -gt 0 ]

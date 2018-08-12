@@ -10,7 +10,7 @@ do
         echo "Exists: $s"
     else
         echo "$s" >> ./white_cidr.list
-        sort -u ./white_cidr.list -o ./white_cidr.list
+        sort -u -t. -k 1,1n -k 2,2n -k 3,3n -k 4,4n ./white_cidr.list -o ./white_cidr.list
         echo "Added: $s"
     fi
 done
