@@ -3,6 +3,7 @@
 # https://github.com/txthinking/pac
 #
 
+export LC_COLLATE=C
 for s
 do
     if [ $(grep -e "^$s$" ./black.list | wc -l) -gt 0 ]
