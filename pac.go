@@ -28,7 +28,7 @@ var listen string
 func main() {
 	app := cli.NewApp()
 	app.Name = "PAC"
-	app.Version = "20180613"
+	app.Version = "20180918"
 	app.Usage = "PAC file generator"
 	app.Author = "Cloud"
 	app.Email = "cloud@txthinking.com"
@@ -162,7 +162,7 @@ func readData(url string) ([]byte, error) {
 		return data, nil
 	}
 	if strings.HasPrefix(url, "file://") {
-		data, err := ioutil.ReadFile(url)
+		data, err := ioutil.ReadFile(url[7:])
 		if err != nil {
 			return nil, err
 		}
