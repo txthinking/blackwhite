@@ -3,11 +3,11 @@ package pac
 import (
 	"bytes"
 	"errors"
-	"html/template"
 	"io"
 	"io/ioutil"
 	"net/http"
 	"strings"
+	"text/template"
 	"time"
 
 	"github.com/txthinking/ant"
