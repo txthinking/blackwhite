@@ -10,7 +10,7 @@ import (
 	"text/template"
 	"time"
 
-	"github.com/txthinking/ant"
+	"github.com/txthinking/x"
 )
 
 func PAC(proxy, mode, domainURL, cidrURL string) (io.Reader, error) {
@@ -100,15 +100,15 @@ func makeCIDRs(data []byte) []map[string]int64 {
 	data = bytes.Replace(data, []byte{0x0d, 0x0a}, []byte{0x0a}, -1)
 	ss := strings.Split(string(data), "\n")
 	for _, s := range ss {
-		c, err := ant.CIDR(s)
+		c, err := x.CIDR(s)
 		if err != nil {
 			continue
 		}
-		first, err := ant.IP2Decimal(c.First)
+		first, err := x.IP2Decimal(c.First)
 		if err != nil {
 			continue
 		}
-		last, err := ant.IP2Decimal(c.Last)
+		last, err := x.IP2Decimal(c.Last)
 		if err != nil {
 			continue
 		}
