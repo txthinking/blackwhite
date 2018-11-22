@@ -3,7 +3,7 @@
 // https://github.com/txthinking/pac
 //
 
-var proxy="SOCKS5 127.0.0.1:1090; SOCKS 127.0.0.1:1090; DIRECT";
+var proxy="SOCKS5 [::1]:1090; SOCKS [::1]:1090; DIRECT";
 
 var mode = "white";
 
