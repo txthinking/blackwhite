@@ -13,25 +13,19 @@
 
 * `https://blackwhite.txthinking.com/white.list`
 * `https://blackwhite.txthinking.com/white_cidr.list`
-* `https://blackwhite.txthinking.com/white_app.list`
 * `https://blackwhite.txthinking.com/black.list`
 * `https://blackwhite.txthinking.com/black_cidr.list`
-* `https://blackwhite.txthinking.com/black_app.list`
 
 ### How to update list
 
 * `$ addWhite.sh          china.com`
 * `$ addWhiteCIDR.sh      1.0.1.0/24`
-* `$ addWhiteApp.sh       com.tencent.mm`
 * `$ addBlack.sh          google.com`
 * `$ addBlackCIDR.sh      74.125.0.0/16`
-* `$ addBlackApp.sh       com.android.chrome`
 * `$ removeWhite.sh       china.com`
 * `$ removeWhiteCIDR.sh   1.0.1.0/24`
-* `$ removeWhiteApp.sh    com.tencent.mm`
 * `$ removeBlack.sh       google.com`
 * `$ removeBlackCIDR.sh   74.125.0.0/16`
-* `$ removeBlackApp.sh    com.android.chrome`
 
 > Don't edit list directly<br/>
 > Prefer first-level domain
