@@ -1,5 +1,5 @@
 //
-// https://github.com/txthinking/pac
+// https://github.com/txthinking/blackwhite
 //
 package main
 
@@ -12,7 +12,7 @@ import (
 	"os"
 
 	"github.com/codegangsta/cli"
-	"github.com/txthinking/pac/pac"
+	"github.com/txthinking/blackwhite/pac"
 )
 
 var mode string
