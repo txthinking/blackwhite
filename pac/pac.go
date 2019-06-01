@@ -59,6 +59,44 @@ func PAC(proxy, mode, domainURL, cidrURL string) (io.Reader, error) {
 	return b, nil
 }
 
+func PACFromString(proxy, mode, domains, cidrs string) (io.Reader, error) {
+	t := template.New("pac")
+	t, err := t.Parse(js)
+	if err != nil {
+		return nil, err
+	}
+	b := &bytes.Buffer{}
+
+	if mode == "global" {
+		if err := t.Execute(b, map[string]interface{}{
+			"mode":  "global",
+			"proxy": proxy,
+		}); err != nil {
+			return nil, err
+		}
+		return b, nil
+	}
+
+	var ds []string
+	var cs []map[string]int64
+	if domains != "" {
+		ds = makeDomains([]byte(domains))
+	}
+	if cidrs != "" {
+		cs = makeCIDRs([]byte(cidrs))
+	}
+
+	if err := t.Execute(b, map[string]interface{}{
+		"proxy":   proxy,
+		"mode":    mode,
+		"domains": ds,
+		"cidrs":   cs,
+	}); err != nil {
+		return nil, err
+	}
+	return b, nil
+}
+
 func readData(url string) ([]byte, error) {
 	if strings.HasPrefix(url, "http://") || strings.HasPrefix(url, "https://") {
 		c := &http.Client{
