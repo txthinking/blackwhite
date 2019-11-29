@@ -11,8 +11,8 @@ import (
 	"net/http"
 	"os"
 
-	"github.com/codegangsta/cli"
 	"github.com/txthinking/blackwhite/pac"
+	"github.com/urfave/cli"
 )
 
 var mode string
@@ -26,31 +26,34 @@ func main() {
 	app.Name = "PAC"
 	app.Version = "20180918"
 	app.Usage = "PAC file generator"
-	app.Author = "Cloud"
-	app.Email = "cloud@txthinking.com"
 	app.Flags = []cli.Flag{
-		cli.StringFlag{
-			Name:        "mode, m",
+		&cli.StringFlag{
+			Name:        "mode",
+			Aliases:     []string{"m"},
 			Usage:       "white/black/global [required]",
 			Destination: &mode,
 		},
-		cli.StringFlag{
-			Name:        "domainURL, d",
+		&cli.StringFlag{
+			Name:        "domainURL",
+			Aliases:     []string{"d"},
 			Usage:       "domains url, http(s):// or file:// [required when mode is not global]",
 			Destination: &domainURL,
 		},
-		cli.StringFlag{
-			Name:        "cidrURL, c",
+		&cli.StringFlag{
+			Name:        "cidrURL",
+			Aliases:     []string{"c"},
 			Usage:       "CIDR url, http(s):// or file:// [optional]",
 			Destination: &cidrURL,
 		},
-		cli.StringFlag{
-			Name:        "proxy, p",
+		&cli.StringFlag{
+			Name:        "proxy",
+			Aliases:     []string{"p"},
 			Usage:       "Proxy, like: SOCKS5 127.0.0.1:1080; SOCKS 127.0.0.1:1080; DIRECT [required]",
 			Destination: &proxy,
 		},
-		cli.StringFlag{
-			Name:        "listen, l",
+		&cli.StringFlag{
+			Name:        "listen",
+			Aliases:     []string{"l"},
 			Usage:       "HTTP server address, like: 127.0.0.1:1980 [optional]",
 			Destination: &listen,
 		},
