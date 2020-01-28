@@ -21,18 +21,7 @@ func PAC(proxy, mode, domainURL, cidrURL string) (io.Reader, error) {
 	}
 	b := &bytes.Buffer{}
 
-	if mode == "global" {
-		if err := t.Execute(b, map[string]interface{}{
-			"mode":  "global",
-			"proxy": proxy,
-		}); err != nil {
-			return nil, err
-		}
-		return b, nil
-	}
-
-	var ds []string
-	var cs []map[string]int64
+	ds := make([]string, 0)
 	if domainURL != "" {
 		data, err := readData(domainURL)
 		if err != nil {
@@ -40,6 +29,7 @@ func PAC(proxy, mode, domainURL, cidrURL string) (io.Reader, error) {
 		}
 		ds = makeDomains(data)
 	}
+	cs := make([]map[string]int64, 0)
 	if cidrURL != "" {
 		data, err := readData(cidrURL)
 		if err != nil {
@@ -67,25 +57,14 @@ func PACFromString(proxy, mode, domains, cidrs string) (io.Reader, error) {
 	}
 	b := &bytes.Buffer{}
 
-	if mode == "global" {
-		if err := t.Execute(b, map[string]interface{}{
-			"mode":  "global",
-			"proxy": proxy,
-		}); err != nil {
-			return nil, err
-		}
-		return b, nil
-	}
-
-	var ds []string
-	var cs []map[string]int64
+	ds := make([]string, 0)
 	if domains != "" {
 		ds = makeDomains([]byte(domains))
 	}
+	cs := make([]map[string]int64, 0)
 	if cidrs != "" {
 		cs = makeCIDRs([]byte(cidrs))
 	}
-
 	if err := t.Execute(b, map[string]interface{}{
 		"proxy":   proxy,
 		"mode":    mode,
@@ -167,21 +146,17 @@ var proxy="{{.proxy}}";
 
 var mode = "{{.mode}}";
 
-{{if .domains}}
 var domains = {
 	{{range .domains}}
 	"{{.}}": 1,
 	{{end}}
 };
-{{end}}
 
-{{if .cidrs}}
 var cidrs = [
     {{range .cidrs}}
     [{{.first}},{{.last}}],
 	{{end}}
 ];
-{{end}}
 
 function ip2decimal(ip) {
     var d = ip.split('.');
@@ -196,7 +171,9 @@ function FindProxyForURL(url, host){
                 isInNet(dnsResolve(host), "127.0.0.0", "255.255.255.0")){
             return "DIRECT";
         }
-        {{if .cidrs}}
+		if(mode == "global"){
+			return proxy;
+		}
         var d = ip2decimal(host);
         var l = cidrs.length;
         var min = 0;
@@ -219,14 +196,21 @@ function FindProxyForURL(url, host){
                 min = mid+1;
             }
         }
-		{{end}}
+		if(mode == "white"){
+			return proxy;
+		}
+		if(mode == "black"){
+			return "DIRECT";
+		}
     }
 
     if (isPlainHostName(host)){
         return "DIRECT";
     }
 
-    {{if .domains}}
+	if(mode == "global"){
+		return proxy;
+	}
     var a = host.split(".");
     for(var i=a.length-1; i>=0; i--){
         if (domains.hasOwnProperty(a.slice(i).join("."))){
@@ -243,11 +227,6 @@ function FindProxyForURL(url, host){
 	}
 	if(mode == "black"){
 		return "DIRECT";
-	}
-	{{end}}
-
-	if(mode == "global"){
-		return proxy;
 	}
 }
 `
