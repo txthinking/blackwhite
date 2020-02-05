@@ -1,4 +1,4 @@
-# A PAC Generator [![Financial Contributors on Open Collective](https://opencollective.com/blackwhite/all/badge.svg?label=financial+contributors)](https://opencollective.com/blackwhite)
+# A PAC Generator
 
 ### Online
 
@@ -59,29 +59,6 @@ $ go run pac.go \
 
 $ curl http://127.0.0.1:1980/proxy.pac
 ```
-
-## Financial Contributors
-
-Become a financial contributor and help us sustain our community. \[[Contribute](https://opencollective.com/blackwhite/contribute)]
-
-#### Individuals
-
-<a href="https://opencollective.com/blackwhite"><img src="https://opencollective.com/blackwhite/individuals.svg?width=890"></a>
-
-#### Organizations
-
-Support this project with your organization. Your logo will show up here with a link to your website. \[[Contribute](https://opencollective.com/blackwhite/contribute)]
-
-<a href="https://opencollective.com/blackwhite/organization/0/website"><img src="https://opencollective.com/blackwhite/organization/0/avatar.svg"></a>
-<a href="https://opencollective.com/blackwhite/organization/1/website"><img src="https://opencollective.com/blackwhite/organization/1/avatar.svg"></a>
-<a href="https://opencollective.com/blackwhite/organization/2/website"><img src="https://opencollective.com/blackwhite/organization/2/avatar.svg"></a>
-<a href="https://opencollective.com/blackwhite/organization/3/website"><img src="https://opencollective.com/blackwhite/organization/3/avatar.svg"></a>
-<a href="https://opencollective.com/blackwhite/organization/4/website"><img src="https://opencollective.com/blackwhite/organization/4/avatar.svg"></a>
-<a href="https://opencollective.com/blackwhite/organization/5/website"><img src="https://opencollective.com/blackwhite/organization/5/avatar.svg"></a>
-<a href="https://opencollective.com/blackwhite/organization/6/website"><img src="https://opencollective.com/blackwhite/organization/6/avatar.svg"></a>
-<a href="https://opencollective.com/blackwhite/organization/7/website"><img src="https://opencollective.com/blackwhite/organization/7/avatar.svg"></a>
-<a href="https://opencollective.com/blackwhite/organization/8/website"><img src="https://opencollective.com/blackwhite/organization/8/avatar.svg"></a>
-<a href="https://opencollective.com/blackwhite/organization/9/website"><img src="https://opencollective.com/blackwhite/organization/9/avatar.svg"></a>
 
 ### Thanks to
 
