@@ -71,14 +71,20 @@ function ischina(){
 }
 
 function getdomain(){
+    if [ $(echo $1 | $awk -F . '{print $(NF)}') = "cn" ]
+    then
+        return
+    fi
     dm=$(echo $1 | $awk -F . '{print $(NF-1) "." $(NF)}')
     if [ $(echo $dm | wc -L) -eq 5 ]
     then
+        echo "please review $dm"
         echo $dm >> /tmp/review.5.list
         return
     fi
     if [ $(echo $dm | wc -L) -eq 6 ]
     then
+        echo "please review $dm"
         echo $dm >> /tmp/review.6.list
         return
     fi
@@ -87,7 +93,6 @@ function getdomain(){
 
 for s in $(cat $1 | sort | uniq)
 do
-    echo "checking $s"
     host=$(gethost $s)
     if [ -z $host ]
     then
@@ -99,5 +104,9 @@ do
         continue
     fi
     dm=$(getdomain $host)
+    if [ -z $dm ]
+    then
+        continue
+    fi
     ./addWhite.sh $dm
 done
