@@ -25,8 +25,8 @@ $ ./removeBlackCIDR.sh 74.125.0.0/16
 
 #### Online PAC with `socks5://127.0.0.1:1080`
 
-- White Mode: `https://blackwhite.txthinking.com/white.pac`
-- Black Mode: `https://blackwhite.txthinking.com/black.pac`
+- `https://blackwhite.txthinking.com/white.pac`
+- `https://blackwhite.txthinking.com/black.pac`
 
 > You can create PAC by yourself with [$ brook pac ...](https://github.com/txthinking/brook)
 
