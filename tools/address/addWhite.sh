@@ -1,5 +1,7 @@
 #!/bin/bash
 
+# !!! This require GUN tools
+
 grep="grep"
 if [ $(uname) = "Darwin" ]
 then
@@ -53,7 +55,7 @@ function gethost(){
 }
 
 function ischina(){
-    ip=$(dig +short $1 @114.114.114.114 | head -n 1)
+    ip=$(dig +short $1 @114.114.114.114 | tail -n 1)
     if [ $(echo $ip | $grep -P '\d' | wc -l) -eq 0 ]
     then
         return
@@ -108,5 +110,5 @@ do
     then
         continue
     fi
-    ./addWhite.sh $dm
+    ../../addWhite.sh $dm
 done
