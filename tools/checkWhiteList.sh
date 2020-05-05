@@ -1,5 +1,6 @@
 #!/bin/bash
 
+# check from a address list, domain:port
 # !!! This require GUN tools
 
 grep="grep"
@@ -55,7 +56,11 @@ function gethost(){
 }
 
 function ischina(){
-    ip=$(dig +short $1 @114.114.114.114 | tail -n 1)
+    if [ $(echo $1 | $grep -P '(goog|gstatic|googleusercontent|googleapis|googlevideo|gvt)' | wc -l) -gt 0 ]
+    then
+        return
+    fi
+    ip=$(dig +short $1 @223.6.6.6 | tail -n 1)
     if [ $(echo $ip | $grep -P '\d' | wc -l) -eq 0 ]
     then
         return
@@ -78,18 +83,6 @@ function getdomain(){
         return
     fi
     dm=$(echo $1 | $awk -F . '{print $(NF-1) "." $(NF)}')
-    if [ $(echo $dm | wc -L) -eq 5 ]
-    then
-        echo "please review $dm"
-        echo $dm >> /tmp/review.5.list
-        return
-    fi
-    if [ $(echo $dm | wc -L) -eq 6 ]
-    then
-        echo "please review $dm"
-        echo $dm >> /tmp/review.6.list
-        return
-    fi
     echo $dm
 }
 
@@ -110,5 +103,5 @@ do
     then
         continue
     fi
-    ../../addWhite.sh $dm
+    echo $dm
 done
