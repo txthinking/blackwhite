@@ -58,6 +58,7 @@ function gethost(){
 function ischina(){
     if [ $(echo $1 | $grep -P '(goog|gstatic|googleusercontent|googleapis|googlevideo|gvt)' | wc -l) -gt 0 ]
     then
+        echo "no"
         return
     fi
     ip=$(dig +short $1 @223.6.6.6 | tail -n 1)
@@ -75,6 +76,7 @@ function ischina(){
         echo "yes"
         return
     fi
+    echo "no"
 }
 
 function getdomain(){
@@ -94,7 +96,7 @@ do
         continue
     fi
     is=$(ischina $host)
-    if [ "$is" != "yes" ]
+    if [ "$is" = "" ]
     then
         continue
     fi
@@ -103,5 +105,16 @@ do
     then
         continue
     fi
-    echo $dm
+    if [ "$is" = "yes" ]
+    then
+        echo $dm > /tmp/china.list
+    fi
+    if [ "$is" = "no" ]
+    then
+        if [ $(echo $dm | $grep -P '^(com\.|ip\.sb)$' | wc -l) -ne 0 ]
+        then
+            continue
+        fi
+        echo $dm > /tmp/nonchina.list
+    fi
 done
