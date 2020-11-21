@@ -1,5 +1,7 @@
 # Black & White List
 
+Moved to [bypass](https://github.com/txthinking/bypass)
+
 #### List
 
 - `https://txthinking.github.io/blackwhite/white.list`
