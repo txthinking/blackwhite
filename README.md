@@ -1,6 +1,6 @@
 # Black & White List
 
-Moved to [bypass](https://github.com/txthinking/bypass)
+**🔊Moved to [bypass](https://github.com/txthinking/bypass)**
 
 #### List
 
